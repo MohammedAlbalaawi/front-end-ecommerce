@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 
 
 const Navbar = () =>{
+
+  const count = useSelector(state => state.counter.value)
     return (
 
       <div>
@@ -46,7 +49,7 @@ const Navbar = () =>{
                 <NavLink to='/cart'
                   className='btn btn-outline-dark me-1'>
                   <i className='fa fa-shopping-cart me-1' />
-                  Cart <span className='badge bg-danger'>0</span>
+                  Cart <span className='badge bg-danger'>{count}</span>
                 </NavLink>
                 
               </div>

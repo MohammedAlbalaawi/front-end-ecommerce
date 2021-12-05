@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router'
-import { NavLink } from 'react-router-dom';
+import { decreament, increament } from '../store/features/counter/counterSlice';
 
 
 
@@ -12,6 +14,10 @@ const Product = () => {
     const [loading, setLoading] = useState(false);
 
     const [quantity, setQuantity] = useState(0);
+    const count = useSelector(state => state.counter.value)
+    const dispatch = useDispatch()
+
+    let countNum = 0;
 
     useEffect(() => {
         const getProduct = async () => {
@@ -42,17 +48,13 @@ const Product = () => {
             </>
         )
     }
-
-
-    const handleQuantityChange = (e) => {
-
-        const value = e.target.value;
-
-        if (value < 0) return;
-
-        setQuantity(value);
+    const inc = () => {
+        setQuantity(quantity + 1);
     }
-
+    const dec = () => {
+        if (quantity <= 0) return;
+        setQuantity(quantity - 1);
+    }
     const ShowProduct = () => {
         return (
             <>
@@ -65,15 +67,18 @@ const Product = () => {
                     <p className='lead fw-bolder'>Rating {product.rating && product.rating.rate}<i className='fa fa-star'></i></p>
                     <h3 className='display-6 fw-bold'>$ {product.price}</h3>
                     <p className='lead'>{product.description}</p>
-                    <p className='text-uppercase text-black me-3'>Quantity </p>
+                    <p className='text-uppercase text-black me-3'>Quantity</p>
                     <div className='d-flex mb-3 '>
-                        <input type="number" className="form-control" 
-                        value={quantity} onChange={handleQuantityChange}/>
+                        <span className="input-group-text">{quantity}</span>
                         <span className="input-group-text ">Total</span>
                         <span className="input-group-text "> $ {quantity * product.price}</span>
                     </div>
-                    <button className='btn btn-outline-dark px-4 py-2'>Add to Cart</button>
-                    <NavLink to='/cart' className='btn btn-dark px-3py-2 ms-2'>Go to Cart</NavLink>
+
+                    <button className='btn btn-outline-dark px-4 py-2'
+                        onClick={() => { dispatch(increament()); inc() }}>+</button>
+                    <button className='btn btn-outline-dark px-4 py-2 ms-2'
+                        onClick={() => { dispatch(decreament()); dec() }}>-</button>
+                    {/* <NavLink to='/cart' className='btn btn-dark px-3py-2 ms-2'>-</NavLink> */}
                 </div>
 
             </>
