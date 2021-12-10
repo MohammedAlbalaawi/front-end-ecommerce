@@ -14,19 +14,21 @@ const Product = () => {
     const [loading, setLoading] = useState(false);
 
     const [quantity, setQuantity] = useState(0);
-    const count = useSelector(state => state.counter.value)
     const dispatch = useDispatch()
-
-    let countNum = 0;
+    const itemscount = useSelector(state => state.counter.pecies)
 
     useEffect(() => {
         const getProduct = async () => {
             setLoading(true);
-            const response = await fetch(`http://fakestoreapi.com/products/${id}`);
+            const response = await fetch(`https://fakestoreapi.com/products/${id}`);
             setproduct(await response.json());
             setLoading(false);
         }
         getProduct();
+
+        // get quantity of this product and show it
+        itemscount.map((item) => item.id == id ? setQuantity(item.qty) : item)
+
     }, [])
 
 
@@ -48,6 +50,8 @@ const Product = () => {
             </>
         )
     }
+
+    // inc and dec just showing the num in screen, changing value of (qty in pecies and value in store)
     const inc = () => {
         setQuantity(quantity + 1);
     }
@@ -55,10 +59,11 @@ const Product = () => {
         if (quantity <= 0) return;
         setQuantity(quantity - 1);
     }
+
     const ShowProduct = () => {
         return (
             <>
-                <div className='col-md-6'>
+                <div className='col-md-6' key={product.id}>
                     <img src={product.image} alt={product.title} height='400px' width='400px' />
                 </div>
                 <div className='col-md-6'>
@@ -73,12 +78,14 @@ const Product = () => {
                         <span className="input-group-text ">Total</span>
                         <span className="input-group-text "> $ {quantity * product.price}</span>
                     </div>
-
                     <button className='btn btn-outline-dark px-4 py-2'
-                        onClick={() => { dispatch(increament()); inc() }}>+</button>
+                        onClick={() => { dispatch(increament(product)); inc() }}>+</button>
                     <button className='btn btn-outline-dark px-4 py-2 ms-2'
-                        onClick={() => { dispatch(decreament()); dec() }}>-</button>
-                    {/* <NavLink to='/cart' className='btn btn-dark px-3py-2 ms-2'>-</NavLink> */}
+                        onClick={() => {
+                            dispatch(decreament(product.id));
+                            dec();
+                        }}>-</button>
+
                 </div>
 
             </>
