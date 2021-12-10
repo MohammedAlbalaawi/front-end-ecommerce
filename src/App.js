@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import Products from './components/Products';
 import Product from './components/Product';
 import Cart from './components/Cart';
+import MailSender from './components/MailSender';
+import AboutUs from './components/AboutUs';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route exact path='/products' element={<Products />}></Route>
           <Route exact path='/product/:id' element={<Product />}></Route>
           <Route exact path='/cart' element={<Cart />}></Route>
+          <Route exact path='/contact' element={<MailSender />}></Route>
+          <Route exact path='/about' element={<AboutUs />}></Route>
         </Routes >
       
     </>

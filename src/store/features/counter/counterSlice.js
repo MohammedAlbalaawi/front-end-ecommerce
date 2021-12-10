@@ -46,19 +46,23 @@ const counterSlice = createSlice({
             })
 
         },
-// delete product from items and pecies arrays
+        // delete product from items and pecies arrays
         deleteItem(state, { payload }) {
 
-            var removeIndex = state.productItem.map((item) => item.id).indexOf(payload)
-            state.productItem.splice(removeIndex, 1)
+            var result = window.confirm("Do you want to DELETE this item?")
+            if (result) {
+                var removeIndex = state.productItem.map((item) => item.id).indexOf(payload)
+                state.productItem.splice(removeIndex, 1)
 
-            state.pecies.map((item) => {
-                if (item.id === payload) {
-                    state.value -= item.qty
+                state.pecies.map((item) => {
+                    if (item.id === payload) {
+                        state.value -= item.qty
 
-                    state.pecies.splice(removeIndex, 1)
-                }
-            })
+                        state.pecies.splice(removeIndex, 1)
+                    }
+                })
+            }
+
         }
     },
 })
