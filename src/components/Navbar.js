@@ -36,7 +36,7 @@ const Navbar = () =>{
               </ul>
 
               <div className='buttons'>
-                <NavLink to='/login'
+                {/* <NavLink to='/login'
                   className='btn btn-outline-dark me-1'>
                   <i className='fa fa-sign-in me-1' />
                   Login
@@ -45,7 +45,7 @@ const Navbar = () =>{
                   className='btn btn-outline-dark me-1'>
                   <i className='fa fa-user-plus me-1' />
                   Sign Up
-                </NavLink>
+                </NavLink> */}
                 <NavLink to='/cart'
                   className='btn btn-outline-dark me-1'>
                   <i className='fa fa-shopping-cart me-1' />
