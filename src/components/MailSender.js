@@ -13,8 +13,8 @@ function MailSender() {
 
         emailjs.sendForm('service_6shmhk7', 'template_x31ccn3', e.target, 'user_ca5Ux1Cda6oBXc87GpIvO')
             .then(res => {
-                console.log(res)
-            }).catch((err) => console.log(err))
+                
+            }).catch((err) => {})
 
         setUserName('')
         setUserEmail('')
