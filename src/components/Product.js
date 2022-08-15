@@ -44,7 +44,7 @@ const Product = () => {
                     <Skeleton height={25} width={150} />
                     <Skeleton height={50} />
                     <Skeleton height={150} />
-                    <Skeleton height={50} width={100} inline={true} />
+                    <Skeleton height={50} width={100} inline />
                     <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
                 </div>
             </>
